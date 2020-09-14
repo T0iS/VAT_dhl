@@ -1,4 +1,5 @@
-//#include "functions.cpp"
+#define _CRT_SECURE_NO_WARNINGS
+#include <ctime>
 #include <filesystem>
 #include <regex>
 #include <iostream>
@@ -67,7 +68,7 @@ public:
 };
 
 bool writeToFile(std::vector<std::vector<std::string>> vec) {
-	std::ofstream outputCSV("zpracovanyVypisSK.csv");
+	std::ofstream outputCSV("DHL_makro_csv.csv");
 	for (std::vector<std::string> v : vec) {
 		for (std::string cell : v) {
 			outputCSV << cell << ';';
@@ -107,63 +108,79 @@ int main() {
 
 	vector<vector<string>> sourceData = sourceCSV.getData();
 
-	vector<vector<string>> destData(100);
+	vector<vector<string>> destData;
 	
 
 
 	for (int i = 0; i < sourceData.size(); i++) {
+		vector<string> v;
+		destData.push_back(v);
 		destData[i].push_back("304024139");
-		destData[i][1].push_back("");
-		destData[i][2].push_back("Jakub Sopuch");
-		destData[i][3].push_back("Korejska 724/15");
-		destData[i][4].push_back("70200");
-		destData[i][5].push_back("OSTRAVA");
-		destData[i][6].push_back("420");
-		destData[i][7].push_back("774778797");
-		destData[i][8].push_back("orders@remote-control-world.eu");
-		destData[i][9].push_back("CZ28582543");
-		destData[i][10].push_back("CZ28582543");
-		destData[i][11].push_back("CZ");
-		destData[i][12].push_back("WPX");
-		
+		destData[i].push_back("VAT_Electronic");
+		destData[i].push_back("Jakub Sopuch");
+		destData[i].push_back("Korejska 724/15");
+		destData[i].push_back("70200");
+		destData[i].push_back("OSTRAVA");
+		destData[i].push_back("420");
+		destData[i].push_back("774778797");
+		destData[i].push_back("orders@remote-control-world.eu");
+		destData[i].push_back("CZ28582543");
+		destData[i].push_back("CZ28582543");
+		destData[i].push_back("CZ");
+		destData[i].push_back("WPX");
+
 
 		//13 = N
+		try{
+			destData[i].push_back(sourceData[i][0]);
+			destData[i].push_back(sourceData[i][3]);
+			destData[i].push_back(sourceData[i][4]);
+			destData[i].push_back("");
+			destData[i].push_back(sourceData[i][6]);
+			destData[i].push_back(sourceData[i][5]);
+			destData[i].push_back(sourceData[i][8]);
+			destData[i].push_back(sourceData[i][0]);
+			//destData[i][21] = getCode(sourceData[i][7]);
+			destData[i].push_back("1");
+			destData[i].push_back(sourceData[i][10]);
+		}
+		catch (exception) {
+			break;
+		}
 
-		destData[i][13].push_back(sourceData[i][0]);
-		destData[i][14].push_back(sourceData[i][3]);
-		destData[i][15].push_back(sourceData[i][4]);
-		destData[i][17].push_back(sourceData[i][6]);
-		destData[i][18].push_back(sourceData[i][5]);
-		destData[i][19].push_back(sourceData[i][8]);
-		destData[i][20].push_back(sourceData[i][0]);
-		//destData[i][21] = getCode(sourceData[i][7]);
-		destData[i][22].push_back(sourceData[i][10]);
+		destData[i].push_back("1");	
+		destData[i].push_back("IR remote control");
+		destData[i].push_back("0.5");
+		destData[i].push_back(sourceData[i][7]);
+		destData[i].push_back("P");
+		destData[i].push_back("500");
+		destData[i].push_back("CZK");
+		destData[i].push_back(sourceData[i][9]);
 
-		destData[i][23].push_back("1");
-		destData[i][24].push_back("IR remote control");
-		destData[i][25].push_back("0.5");
-		destData[i][26].push_back(sourceData[i][7]);
-		destData[i][27].push_back("P");
-		destData[i][28].push_back("500");
-		destData[i][29].push_back("CZK");
-		destData[i][30].push_back(sourceData[i][9]);
-		char out[9];
-		std::time_t t = std::time(NULL);
-		//std::strftime(out, sizeof(out), "%Y%m%d", std::localtime(&t));
 
-		destData[i][31].push_back("20200831");
-		destData[i][32].push_back("");
-		destData[i][33].push_back("");
-		destData[i][34].push_back("Commercial");
-		destData[i][35].push_back("IR remote control");
-		destData[i][36].push_back("1");
-		destData[i][37].push_back("500");
-		destData[i][38].push_back("0.2");
-		destData[i][39].push_back("0.2");
-		destData[i][40].push_back("CN");
-		destData[i][41].push_back("P");
-		destData[i][42].push_back("DAP");
-		destData[i][43].push_back("Y");
+		time_t timer;
+		char buffer[10];
+		struct tm* tm_info;
+
+		timer = time(NULL);
+		tm_info = localtime(&timer);
+
+		
+		sprintf(buffer, "%d%02d%02d", tm_info->tm_year + 1900, tm_info->tm_mon + 1, tm_info->tm_mday);
+
+		destData[i].push_back(buffer);
+		destData[i].push_back("");
+		destData[i].push_back("");
+		destData[i].push_back("Commercial");
+		destData[i].push_back("IR remote control");
+		destData[i].push_back("1");
+		destData[i].push_back("500");
+		destData[i].push_back("0.2");
+		destData[i].push_back("0.2");
+		destData[i].push_back("CN");
+		destData[i].push_back("P");
+		destData[i].push_back("DAP");
+		destData[i].push_back("Y");
 
 
 		
@@ -171,7 +188,7 @@ int main() {
 	}
 
 	writeToFile(destData);
-	getchar();
+//	getchar();
 
 	return 0;
 }

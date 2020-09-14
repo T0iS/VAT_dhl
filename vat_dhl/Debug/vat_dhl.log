@@ -1,4 +1,3 @@
 ﻿  main.cpp
-c:\users\tom\source\repos\vat_dhl\vat_dhl\main.cpp(114): warning C4018: <: signed/unsigned – neshoda
-c:\users\tom\source\repos\vat_dhl\vat_dhl\main.cpp(150): warning C4101: out: neodkazovaná lokální proměnná
-  vat_dhl.vcxproj -> C:\Users\Tom\source\repos\vat_dhl\Debug\vat_dhl.exe
+c:\users\tom_\source\repos\vat_dhl\vat_dhl\main.cpp(115): warning C4018: '<': signed/unsigned mismatch
+  vat_dhl.vcxproj -> C:\Users\tom_\source\repos\VAT_dhl\Debug\vat_dhl.exe
