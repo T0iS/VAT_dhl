@@ -136,7 +136,7 @@ int main() {
 			destData[i].push_back(sourceData[i][3]);
 			destData[i].push_back(sourceData[i][4]);
 			destData[i].push_back("");
-			destData[i].push_back(sourceData[i][6]);
+			destData[i].push_back("\"" + sourceData[i][6] + "\"");
 			destData[i].push_back(sourceData[i][5]);
 			destData[i].push_back(sourceData[i][8]);
 			destData[i].push_back(sourceData[i][0]);
